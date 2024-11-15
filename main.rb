@@ -4,9 +4,15 @@ def caeser_cipher(string, key)
 
   string.each_char do |char|
     if alphabet.include?(char.downcase) 
-      key.times { char = char.next }
-    end
-    cipher << char[-1]
+      new_key = (alphabet.index(char.downcase) + key) % 26
+      
+      if char == char.upcase
+        char = alphabet[new_key].upcase
+      else
+        char = alphabet[new_key]
+      end
+    end 
+    cipher << char
   end
   cipher
 end
